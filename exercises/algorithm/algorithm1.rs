@@ -2,7 +2,7 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-// I AM NOT DONE
+
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
@@ -69,15 +69,79 @@ impl<T> LinkedList<T> {
             },
         }
     }
-	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
-	{
-		//TODO
-		Self {
-            length: 0,
-            start: None,
-            end: None,
+    pub fn merge(mut list_a: Self, mut list_b: Self) -> Self
+    where
+        T: PartialOrd + Clone,
+    {
+        let mut res = LinkedList::new();
+        let mut head_a = list_a.start;
+        let mut head_b = list_b.start;
+
+        while head_a.is_some() && head_b.is_some() {
+            let a_val = unsafe { &(*head_a.unwrap().as_ptr()).val };
+            let b_val = unsafe { &(*head_b.unwrap().as_ptr()).val };
+
+            if a_val <= b_val {
+                res.add(a_val.clone());
+                head_a = unsafe { (*head_a.unwrap().as_ptr()).next };
+            } else {
+                res.add(b_val.clone());
+                head_b = unsafe { (*head_b.unwrap().as_ptr()).next };
+            }
         }
-	}
+
+        if head_a.is_some() {
+            while head_a.is_some() {
+                let val = unsafe { &(*head_a.unwrap().as_ptr()).val };
+                res.add(val.clone());
+                head_a = unsafe { (*head_a.unwrap().as_ptr()).next };
+            }
+        }
+
+        if head_b.is_some() {
+            while head_b.is_some() {
+                let val = unsafe { &(*head_b.unwrap().as_ptr()).val };
+                res.add(val.clone());
+                head_b = unsafe { (*head_b.unwrap().as_ptr()).next };
+            }
+        }
+
+        res
+    }
+	// pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
+	// {
+	// 	//TODO
+    //     let head_a = list_a.start;
+    //     let head_b = list_b.start;
+    //     let res = LinkedList::new();
+    //     if head_a.unwrap().as_ptr().val <= head_b.unwrap().as_ptr().val {
+    //         while head_a.unwrap().as_ref().next != None && head_b.unwrap().as_ref().next != None {
+    //             res.add(head_a);
+    //             res.add(head_b);
+    //             head_a = head_a.unwrap().as_ref().next;
+    //             head_b = head_b.unwrap().as_ref().next;
+    //         }
+    //         if head_a.unwrap().as_ref().next != None {
+    //             while head_a.unwrap().as_ref().next != None {
+    //                 res.add(head_a);
+    //                 head_a = head_a.unwrap().as_ref().next;
+    //             }
+    //         }
+    //         if head_b.unwrap().as_ref().next != None {
+    //             while head_b.unwrap().as_ref().next != None {
+    //                 res.add(head_b);
+    //                 head_b = head_b.unwrap().as_ref().next;
+    //             }
+    //         }
+    //     }
+    //
+	// 	Self {
+    //         length: a.length + list_b.length,
+    //         start: res.get(0),
+    //         end: res.get(a.length + list_b.length),
+    //     }
+	// }
+
 }
 
 impl<T> Display for LinkedList<T>

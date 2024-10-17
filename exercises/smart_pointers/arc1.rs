@@ -28,7 +28,7 @@ use std::sync::Arc;
 use std::thread;
 
 fn main() {
-    let numbers: Vec<_> = (0..100u32).collect();
+    let numbers: Vec<u32> = (0..100u32).collect();
     let shared_numbers = // TODO
     let mut joinhandles = Vec::new();
 
