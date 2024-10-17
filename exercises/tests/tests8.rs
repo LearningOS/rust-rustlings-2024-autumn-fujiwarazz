@@ -1,4 +1,4 @@
-// tests8.rs
+ // tests8.rs
 //
 // This execrise shares `build.rs` with the previous exercise.
 // You need to add some code to `build.rs` to make both this exercise and
@@ -7,7 +7,7 @@
 // Execute `rustlings hint tests8` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 fn main() {}
 

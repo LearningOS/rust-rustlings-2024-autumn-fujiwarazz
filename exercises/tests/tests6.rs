@@ -20,8 +20,10 @@ struct Foo {
 unsafe fn raw_pointer_to_box(ptr: *mut Foo) -> Box<Foo> {
     // SAFETY: The `ptr` contains an owned box of `Foo` by contract. We
     // simply reconstruct the box from that pointer.
-    let mut ret: Box<Foo> = unsafe { ??? };
-    todo!("The rest of the code goes here")
+    let mut ret: Box<Foo> = unsafe { 
+        
+     };
+    ret
 }
 
 #[cfg(test)]
@@ -32,7 +34,7 @@ mod tests {
     #[test]
     fn test_success() {
         let data = Box::new(Foo { a: 1, b: None });
-
+// I AM NOT DONE
         let ptr_1 = &data.a as *const u128 as usize;
         // SAFETY: We pass an owned box of `Foo`.
         let ret = unsafe { raw_pointer_to_box(Box::into_raw(data)) };
