@@ -97,7 +97,7 @@ impl<T> LinkedList<T> {
                 head_a = unsafe { (*head_a.unwrap().as_ptr()).next };
             }
         }
-
+ 
         if head_b.is_some() {
             while head_b.is_some() {
                 let val = unsafe { &(*head_b.unwrap().as_ptr()).val };
